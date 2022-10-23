@@ -43,7 +43,7 @@ const thoughtsController = {
             users.findOneAndUpdate({ _id: params.userId }, { $push: { thought: dbThoughtData._id }}, { new: true })
             .then(dbUserData => {
                 if (dbUserData) {
-                    res.status(400).json({ message: 'No user with this ID' });
+                    res.status(404).json({ message: 'No user with this ID' });
                     return;
                 }
                 res.json(dbUserData);
@@ -65,5 +65,16 @@ const thoughtsController = {
         .catch(err => res.json(err));
     },
 
-    
-}
+    // delete thought by id
+    deleteThought({ params }, res) {
+        thoughts.findOneAndDelete({ _id: params.id })
+        .then(dbThoughtData => {
+            if (dbThoughtData) {
+                res.status(404).json({ message: 'No thought with this ID' });
+                return;
+            }
+        })
+    }
+};
+
+module.exports = thoughtsController;
