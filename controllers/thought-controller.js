@@ -26,7 +26,7 @@ const thoughtsController = {
         .select('__v')
         .then(dbThoughtData => {
             if (dbThoughtData) {
-                res.status(400).json({ message: 'No thoughts with this id' });
+                res.status(400).json({ message: 'No thoughts with this ID' });
                 return;
             }
             res.json(dbThoughtData);
@@ -36,4 +36,21 @@ const thoughtsController = {
             res.sendStatus(400);
         });
     },
+
+    createThought({ params }, res) {
+        thoughts.create(body)
+        .then(dbThoughtData => {
+            users.findOneAndUpdate({ _id: params.userId }, { $push: { thought: dbThoughtData._id }}, { new: true })
+            .then(dbUserData => {
+                if (dbUserData) {
+                    res.status(400).json({ message: 'No user with this ID' });
+                    return;
+                }
+                res.json(dbUserData);
+            })
+            .catch(err => res.json(err));
+        })
+    },
+
+    
 }
