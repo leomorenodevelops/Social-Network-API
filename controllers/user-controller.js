@@ -30,4 +30,10 @@ const usersController = {
             res.sendStatus(400);
         });
     },
+
+    createUser({ body },res) {
+        users.create(body)
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => res.json(err));
+    },
 }
