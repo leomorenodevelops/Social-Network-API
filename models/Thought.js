@@ -56,3 +56,13 @@ const thoughtSchema = new Schema(
         id: false
     }
 );
+
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
+
+// Creating the thoughts model by using the thought Schema
+const thoughts = model('thoughts', thoughtSchema);
+
+// Export the thoughts model
+module.exports = thoughts;
