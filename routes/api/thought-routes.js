@@ -12,3 +12,5 @@ const {
 router.route('/').get(getAllThoughts).post(createThought);
 // Set up get by id, put and delete for thoughts
 router.route('/:id').get(getThoughtById).put(updateThought).delete(deleteThought);
+
+module.exports = router;
