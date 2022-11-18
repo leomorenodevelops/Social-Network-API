@@ -14,5 +14,3 @@ Push code to repo stored in GitHub
 
 ## Usage
 Walkthrough video: https://drive.google.com/file/d/1LniOf4ir-Urrt6ejCZlCNRWMACAJy_98/view
-
-Deployed URL: https://github.com/leomorenodevelops/Social-Network-API
