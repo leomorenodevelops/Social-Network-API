@@ -60,17 +60,16 @@ const usersController = {
     },
 
     deleteUser({ params }, res) {
-        thoughts.deleteMany({ _id: params.id })
-          .then(() => {
             users.findOneAndDelete({ _id: params.id })
               .then(dbUserData => {
                 if (!dbUserData) {
                   res.status(404).json({ message: 'No user found with this ID' });
                   return;
                 }
-                res.json(dbUserData);
-            });
-        })
+                thoughts.deleteMany({ _id: { $in: dbUserData.thoughts }})
+            }).then(()=> {
+                res.json({ message: 'Deleted user and all thoughts' }); 
+            }) 
         .catch(err => res.json(err));
     },
 
